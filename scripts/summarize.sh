@@ -24,17 +24,21 @@ fi
 # Load summary prompt
 SUMMARY_PROMPT=$(cat "$REPO_DIR/prompts/summary-prompt.md")
 
-# Build full prompt
-FULL_PROMPT="$SUMMARY_PROMPT
+# Build full prompt and pipe via stdin (avoids shell arg limits for long transcripts)
+PROMPT_FILE=$(mktemp)
+cat > "$PROMPT_FILE" << PROMPTEOF
+$SUMMARY_PROMPT
 
 ---
 
 ## Transcript
 
-$TRANSCRIPT"
+$TRANSCRIPT
+PROMPTEOF
 
 # Run through Claude
-SUMMARY=$(claude -p "$FULL_PROMPT" --output-format text --model sonnet 2>&1)
+SUMMARY=$(cat "$PROMPT_FILE" | claude -p - --output-format text --model sonnet 2>&1)
+rm -f "$PROMPT_FILE"
 
 # Save log
 echo "$SUMMARY" > "$LOG_FILE"
