@@ -33,3 +33,13 @@ Skip Layer 3 entirely if there's nothing meaningful beyond what Layer 2 covers.
 - Use the speaker's framing, don't editorialize.
 - If the transcript is auto-generated and messy, do your best and flag low-confidence sections.
 - Label each layer clearly so the reader can stop at whatever depth they need.
+
+## Formatting (Telegram Markdown)
+Your output will be sent via Telegram. Use this formatting:
+- Layer headers: use a single line with bold text, e.g. `*Layer 1 — The Quick Scan*`
+- Add a blank line between each layer
+- Topic names in bold: `*Topic Name*`
+- Use `—` dashes for separators, not markdown horizontal rules
+- Use bullet points (`•`) for lists, not `-`
+- Keep paragraphs short — no walls of text
+- Add a blank line between each topic for breathing room

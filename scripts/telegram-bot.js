@@ -102,7 +102,12 @@ bot.on('message', async (msg) => {
     // Send summary in chunks if needed
     const chunks = splitMessage(summary);
     for (const chunk of chunks) {
-      await bot.sendMessage(chatId, chunk);
+      try {
+        await bot.sendMessage(chatId, chunk, { parse_mode: 'Markdown' });
+      } catch (e) {
+        // Fallback to plain text if Markdown parsing fails
+        await bot.sendMessage(chatId, chunk);
+      }
     }
   });
 });
