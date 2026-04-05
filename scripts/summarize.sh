@@ -34,7 +34,7 @@ FULL_PROMPT="$SUMMARY_PROMPT
 $TRANSCRIPT"
 
 # Run through Claude
-SUMMARY=$(claude -p "$FULL_PROMPT" --output-format text 2>&1)
+SUMMARY=$(claude -p "$FULL_PROMPT" --output-format text --model sonnet 2>&1)
 
 # Save log
 echo "$SUMMARY" > "$LOG_FILE"
