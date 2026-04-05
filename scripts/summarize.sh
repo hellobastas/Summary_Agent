@@ -4,6 +4,13 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_DIR="$(dirname "$SCRIPT_DIR")"
 VIDEO_ID="$1"
+
+# Source .env for proxy credentials
+if [ -f "$REPO_DIR/.env" ]; then
+    set -a
+    source "$REPO_DIR/.env"
+    set +a
+fi
 DATE=$(date '+%Y-%m-%d_%H%M%S')
 LOG_FILE="$REPO_DIR/data/logs/${DATE}_${VIDEO_ID}.md"
 
